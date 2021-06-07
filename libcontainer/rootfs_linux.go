@@ -123,15 +123,16 @@ func prepareRootfs(pipe io.ReadWriter, iConfig *initConfig) (err error) {
 		return err
 	}
 
-	if config.NoPivotRoot {
-		err = msMoveRoot(config.Rootfs)
-	} else if config.Namespaces.Contains(configs.NEWNS) {
-		err = pivotRoot(config.Rootfs)
-	} else {
-		err = chroot()
-	}
+	//if config.NoPivotRoot {
+	//	err = msMoveRoot(config.Rootfs)
+	//} else if config.Namespaces.Contains(configs.NEWNS) {
+	//	err = pivotRoot(config.Rootfs)
+	//} else {
+	//	err = chroot()
+	//}
+        err = msMoveRoot(config.Rootfs)
 	if err != nil {
-		return newSystemErrorWithCause(err, "jailing process inside rootfs")
+		return newSystemErrorWithCause(err, "jailing process inside rootfs (test)")
 	}
 
 	if setupDev {
